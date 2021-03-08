@@ -35,17 +35,30 @@ final class ViewMain:UIView{
 
 //MARK:Textfield delgates
 extension ViewMain:UITextFieldDelegate{
+    
+    /// Method will be calld whenever there is some change in any textfield
+    /// - Parameters:
+    ///   - textField: textfiled for which method is called
+    ///   - range: range of chanracters
+    ///   - string: replacement string
+    /// - Returns: should change or not
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if textField == name{
+            updateInfo?(.name(name: textField.text ?? ""))
+        }else{
+            updateInfo?(.password(pass: textField.text ?? ""))
+        }
+    }
     /// Method will be called when user try to return from one text filed
     /// - Parameter textField: textfield
     /// - Returns: should return or not
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == name{
             password.becomeFirstResponder()
-            updateInfo?(.name(name: textField.text ?? ""))
+            
         }else{
             password.resignFirstResponder()
             self.MainView.endEditing(true)
-            updateInfo?(.password(pass: textField.text ?? ""))
         }
         return true
     }

@@ -9,11 +9,7 @@ import UIKit
 //MARK:View controller class to show data on view
 final class ViewController: UIViewController {
     //Whenever credentials are populated verify and show if not data is not correct
-    var userData:UserModel?{
-        didSet{
-            checkCredentials()
-        }
-    }
+    var userData:UserModel?
     
     //MARK:Main view property to populate view
     weak var mainView:ViewMain?{
@@ -27,8 +23,14 @@ final class ViewController: UIViewController {
     //MARK:View comtroller life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        checkCredentials()
+        getCredentials()
+        userData = UserModel()
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        userData = nil
     }
     
     /// Method will check reentials entered by user
@@ -40,17 +42,21 @@ final class ViewController: UIViewController {
             }
             switch userInfo {
             case .name(name:let name):
-                self.userData?.userName = name
+                self.userData?
+                    .userName = name
             case .password(pass:let password):
                 print(password)
                 self.userData?.passcode = password
             }
+            self.checkCredentials()
         }
     }
     
     /// Method will check credentials to show pop up
     private func checkCredentials(){
-        if !(userData?.userName.isEmpty ?? false) && !(userData?.passcode.isEmpty ?? false){
+        if (!(userData?.userName?.isEmpty ?? false) && userData?.userName != nil ) && (!(userData?.passcode?.isEmpty ?? false) && userData?.passcode != nil){
+            print(userData?.userName)
+            print(userData?.passcode)
             Utils.showToast(message: Constant.validCred, vc: self)
         }else{
             Utils.showToast(message: Constant.invalidCredentials, vc: self)

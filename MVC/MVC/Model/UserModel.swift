@@ -9,6 +9,6 @@ import Combine
 //MARK:Model for user data
 struct  UserModel{
     //User info data
-    var userName:String
-    var passcode:String
+    var userName:String?
+    var passcode:String?
 }
