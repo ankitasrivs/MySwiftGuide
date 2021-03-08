@@ -9,7 +9,11 @@ import UIKit
 //MARK:View controller class to show data on view
 final class ViewController: UIViewController {
     //Whenever credentials are populated verify and show if not data is not correct
-    var userData:UserModel?
+    var userData:UserModel?{
+        didSet{
+            checkCredentials()
+        }
+    }
     
     //MARK:Main view property to populate view
     weak var mainView:ViewMain?{
@@ -28,27 +32,28 @@ final class ViewController: UIViewController {
     }
     
     /// Method will check reentials entered by user
-    func checkCredentials() {
+    private func getCredentials() {
         mainView?.updateInfo = {[weak self](userInfo) in
             guard let self = self else{
                 print("self is nil")
                 return
             }
-            var nameStr = ""
-            var passwordStr = ""
             switch userInfo {
             case .name(name:let name):
-                nameStr = name
+                self.userData?.userName = name
             case .password(pass:let password):
                 print(password)
-                passwordStr = password
+                self.userData?.passcode = password
             }
-            
-            if !nameStr.isEmpty && !passwordStr.isEmpty{
-                Utils.showToast(message: Constant.validCred, vc: self)
-            }else{
-                Utils.showToast(message: Constant.invalidCredentials, vc: self)
-            }
+        }
+    }
+    
+    /// Method will check credentials to show pop up
+    private func checkCredentials(){
+        if !(userData?.userName.isEmpty ?? false) && !(userData?.passcode.isEmpty ?? false){
+            Utils.showToast(message: Constant.validCred, vc: self)
+        }else{
+            Utils.showToast(message: Constant.invalidCredentials, vc: self)
         }
     }
 }
