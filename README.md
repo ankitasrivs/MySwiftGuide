@@ -3,10 +3,17 @@
 This branch contents Swift Combine definitions with examples
 
 /Publishers:::::
+
+
 //These publisher can emit single/multiple inputs to the subscriber
 
+
+
 ///Simple Example for publisher local
+
+
 let publisherLocal = (1...6).publisher
+
 let subscriber = publisherLocal.sink{ value in
     
     print(value)
@@ -24,7 +31,10 @@ let subscriber = publisherLocal.sink{ value in
 
 //Example of just in Publisher.It send only one value and then stops
 
+
+
 let justPublis = Just(1)
+
 
 let subscriberJust2 = justPublis.sink { (value) in
     print("completion is ::\(value)")
@@ -33,6 +43,7 @@ let subscriberJust2 = justPublis.sink { (value) in
 }
 
 ///Use of assign:we can assign to a variable by using assign property
+
 
 class NewClass {
     var intValue: Int = 0 {
@@ -43,5 +54,6 @@ class NewClass {
 }
 
 let obj = NewClass()
+
 _ = publisherLocal.assign(to: \.intValue, on: obj)
 
