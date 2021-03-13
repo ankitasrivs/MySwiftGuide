@@ -19,3 +19,5 @@ This branch contents Swift Combine definitions with examples
 2.1.Passthrough :::: Passthrough subjects sends multiple value based on demand. They will  send values and completion event.
 
 2.2.CurrentValueSubject :::: This can be used to send current value to the subscriber
+
+3.Eraser :::: It is used to hide publisher details
