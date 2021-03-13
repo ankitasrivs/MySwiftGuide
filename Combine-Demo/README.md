@@ -21,3 +21,6 @@ This branch contents Swift Combine definitions with examples
 2.2.CurrentValueSubject :::: This can be used to send current value to the subscriber
 
 3.Eraser :::: It is used to hide publisher details
+
+
+4.Operators ::: It is used to perform operations on values before publishing it.
