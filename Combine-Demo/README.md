@@ -24,3 +24,5 @@ This branch contents Swift Combine definitions with examples
 
 
 4.Operators ::: It is used to perform operations on values before publishing it.
+
+5.@Publisher use in classes
